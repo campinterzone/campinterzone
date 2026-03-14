@@ -33,7 +33,7 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Camp Interzone — Burning Man 2025",
+  title: "Camp Interzone",
   description:
     "A hidden café at the edge of the known world. Camp Interzone brings the spirit of 1950s Tangier to Black Rock City — free books, cold beer, live music, and open doors.",
   openGraph: {
