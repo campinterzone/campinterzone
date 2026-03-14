@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Color palette */
+  --color-canvas: #F5EDD8;
+  --color-canvas-2: #EAD9B8;
+  --color-accent: #B85C38;
+  --color-cta: #C4891A;
+  --color-text: #1E120A;
+  --color-text-muted: #6B4C35;
+
+  /* Typography */
+  --font-heading: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-courier-prime), "Courier New", ui-monospace, monospace;
+
+  /* Spacing scale (unchanged from Tailwind defaults) */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Base reset for flat/analog aesthetic */
+*,
+*::before,
+*::after {
+  border-radius: 0;
+  box-shadow: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F5EDD8;
+  color: #1E120A;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* Enforce snap hover states — no CSS transitions on interactive elements */
+a,
+button,
+input,
+select,
+textarea,
+[role="button"] {
+  transition: none;
+}
+
+/* Section divider utility */
+.section-rule {
+  border-top: 1px solid #B85C38;
+}
+
+/* Heading utility */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  color: #1E120A;
+}
+
+h1 {
+  font-size: clamp(3rem, 6vw, 5rem);
+  letter-spacing: 0.2em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+h3 {
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+}
+
+/* Polaroid / museum frame image wrapper */
+.framed-image {
+  border: 4px solid #1E120A;
+  display: inline-block;
+}
+
+/* Library checkout card input style */
+.card-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px dotted #1E120A;
+  outline: none;
+  width: 100%;
+  font-family: var(--font-body);
+  color: #1E120A;
+  padding: 0.5rem 0;
+}
+
+.card-input::placeholder {
+  color: #6B4C35;
 }
