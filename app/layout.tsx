@@ -42,6 +42,13 @@ export const metadata: Metadata = {
     url: "https://campinterzone.com",
     siteName: "Camp Interzone",
     type: "website",
+    images: [{ url: "https://campinterzone.com/opengraph-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Camp Interzone",
+    description: "A hidden café at the edge of the known world.",
+    images: ["https://campinterzone.com/opengraph-image.png"],
   },
 };
 
