@@ -2,16 +2,17 @@
 
 @theme {
   /* Color palette */
-  --color-canvas: #F5EDD8;
-  --color-canvas-2: #EAD9B8;
-  --color-accent: #B85C38;
-  --color-cta: #C4891A;
+  --color-canvas: #EDE8DF;
+  --color-canvas-2: #E0D5C5;
+  --color-accent: #906558;
+  --color-cta: #B08020;
   --color-text: #1E120A;
-  --color-text-muted: #6B4C35;
+  --color-text-muted: #6B5045;
 
   /* Typography */
   --font-heading: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-crimson-pro), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
 
   /* Spacing scale (unchanged from Tailwind defaults) */
 }
@@ -29,7 +30,7 @@ html {
 }
 
 body {
-  background-color: #F5EDD8;
+  background-color: #EDE8DF;
   color: #1E120A;
   font-family: var(--font-body);
   font-size: 1.125rem;
@@ -48,7 +49,7 @@ textarea,
 
 /* Section divider utility */
 .section-rule {
-  border-top: 1px solid #B85C38;
+  border-top: 1px solid #906558;
 }
 
 /* Heading utility */
@@ -57,7 +58,6 @@ h1, h2, h3 {
   text-transform: uppercase;
   letter-spacing: 0.15em;
   font-weight: 600;
-  color: #1E120A;
 }
 
 h1 {
@@ -66,7 +66,11 @@ h1 {
 }
 
 h2 {
+  font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0.02em;
 }
 
 h3 {
@@ -93,5 +97,5 @@ h3 {
 }
 
 .card-input::placeholder {
-  color: #6B4C35;
+  color: #6B5045;
 }

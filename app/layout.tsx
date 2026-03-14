@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Jost, Crimson_Pro } from "next/font/google";
+import { Jost, Crimson_Pro, Playfair_Display, Caveat } from "next/font/google";
 import "./globals.css";
 
 const jost = Jost({
@@ -14,6 +14,21 @@ const crimsonPro = Crimson_Pro({
   subsets: ["latin"],
   weight: ["400", "600"],
   style: ["normal", "italic"],
+  display: "swap",
+});
+
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["400", "600"],
   display: "swap",
 });
 
@@ -37,7 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jost.variable} ${crimsonPro.variable}`}>
+      <body className={`${jost.variable} ${crimsonPro.variable} ${playfairDisplay.variable} ${caveat.variable}`}>
         {children}
       </body>
     </html>

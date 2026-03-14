@@ -9,6 +9,7 @@ interface ButtonProps {
   variant?: "filled" | "outline";
   className?: string;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 /**
@@ -26,14 +27,15 @@ export default function Button({
   variant = "filled",
   className = "",
   type = "button",
+  disabled = false,
 }: ButtonProps) {
   const base =
     "inline-block font-heading font-semibold uppercase tracking-widest text-sm py-3 px-8 border-2 cursor-pointer select-none";
 
   const styles =
     variant === "filled"
-      ? "bg-[#C4891A] text-[#F5EDD8] border-[#C4891A] hover:bg-[#F5EDD8] hover:text-[#C4891A]"
-      : "bg-transparent text-[#C4891A] border-[#C4891A] hover:bg-[#C4891A] hover:text-[#F5EDD8]";
+      ? "bg-[#B08020] text-[#EDE8DF] border-[#B08020] hover:bg-[#EDE8DF] hover:text-[#B08020]"
+      : "bg-transparent text-[#B08020] border-[#B08020] hover:bg-[#B08020] hover:text-[#EDE8DF]";
 
   const combined = `${base} ${styles} ${className}`;
 
@@ -46,7 +48,7 @@ export default function Button({
   }
 
   return (
-    <button type={type} onClick={onClick} className={combined}>
+    <button type={type} onClick={onClick} disabled={disabled} className={`${combined} disabled:opacity-50 disabled:cursor-not-allowed`}>
       {children}
     </button>
   );
