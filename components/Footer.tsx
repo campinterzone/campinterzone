@@ -12,7 +12,7 @@ export default function Footer() {
           src="/logo.svg"
           alt="Interzone"
           className="mx-auto mb-8 h-8 w-auto"
-          style={{ filter: "brightness(0) invert(1)" }}
+          style={{ filter: "invert(1)" }}
         />
 
         {/* Nav links */}

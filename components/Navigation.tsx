@@ -25,7 +25,6 @@ export default function Navigation() {
             src="/logo.svg"
             alt="Interzone"
             className="h-7 w-auto"
-            style={{ filter: "brightness(0)" }}
           />
         </Link>
 

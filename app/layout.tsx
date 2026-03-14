@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Jost, Courier_Prime } from "next/font/google";
+import { Jost, Crimson_Pro } from "next/font/google";
 import "./globals.css";
 
 const jost = Jost({
@@ -9,10 +9,11 @@ const jost = Jost({
   display: "swap",
 });
 
-const courierPrime = Courier_Prime({
-  variable: "--font-courier-prime",
+const crimsonPro = Crimson_Pro({
+  variable: "--font-crimson-pro",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -36,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jost.variable} ${courierPrime.variable}`}>
+      <body className={`${jost.variable} ${crimsonPro.variable}`}>
         {children}
       </body>
     </html>
