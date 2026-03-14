@@ -4,8 +4,8 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#1E120A] border-t border-[#B85C38] py-12 px-6">
-      <div className="max-w-5xl mx-auto text-center">
+    <footer className="bg-[#1E2535] border-t border-[#4A6080] py-12 px-6">
+      <div className="max-w-7xl mx-auto text-center">
         {/* Logo */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -18,17 +18,15 @@ export default function Footer() {
         {/* Nav links */}
         <nav className="flex flex-wrap justify-center gap-6 mb-8">
           {[
-            { label: "The Story", href: "#story" },
-            { label: "Library", href: "#library" },
-            { label: "Loud Hours", href: "#loud-hours" },
-            { label: "Workshops", href: "#workshops" },
-            { label: "Gallery", href: "/gallery" },
-            { label: "Join", href: "/join" },
+            { label: "Interzone", href: "/#story" },
+            { label: "Lost Times Library", href: "/#library" },
+            { label: "Events", href: "/#workshops" },
+            { label: "Contact", href: "/join" },
           ].map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="font-heading uppercase tracking-widest text-xs text-[#6B4C35] hover:text-[#C4891A]"
+              className="font-heading uppercase tracking-widest text-xs text-[#8FA8C0] hover:text-white"
             >
               {link.label}
             </Link>
@@ -36,13 +34,13 @@ export default function Footer() {
         </nav>
 
         {/* Divider */}
-        <div className="border-t border-[#B85C38] mb-8" />
+        <div className="border-t border-[#4A6080] mb-8" />
 
         {/* Tagline + copyright */}
-        <p className="font-body text-[#6B4C35] text-sm mb-2">
+        <p className="font-body text-[#8FA8C0] text-sm mb-2">
           Find us on the playa.
         </p>
-        <p className="font-heading uppercase tracking-widest text-xs text-[#6B4C35]">
+        <p className="font-heading uppercase tracking-widest text-xs text-[#8FA8C0]">
           &copy; {year} Camp Interzone &mdash; Black Rock City
         </p>
       </div>

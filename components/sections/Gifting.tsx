@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
@@ -14,61 +15,70 @@ const stagger: Variants = {
 };
 
 export default function Gifting() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.playbackRate = 0.5;
+  }, []);
+
   return (
-    <section id="gifting" className="bg-[#EAD9B8] py-24 px-6">
-      <div className="max-w-3xl mx-auto text-center">
+    <section id="contact" className="relative overflow-hidden bg-[#1E120A] min-h-screen flex flex-col justify-center">
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={stagger}
-        >
-          <motion.p variants={fadeUp} className="font-heading uppercase tracking-widest text-xs text-[#6B4C35] mb-6">
-            Our Philosophy
-          </motion.p>
-          <motion.div variants={fadeUp} className="w-16 border-t border-[#B85C38] mx-auto mb-10" />
-          <motion.h2 variants={fadeUp} className="font-heading font-semibold uppercase tracking-[0.15em] text-[#1E120A] mb-10">
-            The Gift
-          </motion.h2>
-        </motion.div>
+      {/* Video background */}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+      >
+        <source src="/videos/Burning Man 2024 Video.MOV" type="video/mp4" />
+        <source src="/videos/Burning Man 2024 Video.MOV" type="video/quicktime" />
+      </video>
+      <div className="absolute inset-0 bg-[#1E120A]" style={{ opacity: 0.6 }} />
 
-        <motion.blockquote
-          className="border-l-4 border-[#B85C38] pl-8 text-left mb-12"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={fadeUp}
-        >
-          <p className="font-body text-[#1E120A] text-xl leading-loose italic">
-            &ldquo;The economy of the Interzone is the economy of the gift.
-            Nothing is for sale here. Everything is offered without
-            expectation of return. You are not a customer. You are not a
-            visitor. You are a guest — and a guest, in Tangier as on the
-            playa, is sacred.&rdquo;
-          </p>
-        </motion.blockquote>
+      <div className="relative z-10 py-16 md:py-32 px-4 md:px-6 text-center">
+        <div className="max-w-3xl mx-auto">
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={stagger}
-        >
-          <motion.p variants={fadeUp} className="font-body text-[#1E120A] text-lg leading-loose mb-8">
-            The books in our library are yours to keep. The beer at Loud Hours
-            is poured with no tab attached. The workshops cost nothing. This is
-            not a promotional strategy. It is how we understand our presence on
-            the playa — and, perhaps, in the world.
-          </motion.p>
-          <motion.p variants={fadeUp} className="font-body text-[#1E120A] text-lg leading-loose">
-            Burning Man&apos;s gift economy is not a new idea; it is an old one,
-            recovered. In Tangier&apos;s cafés, hospitality was the first
-            principle. We try to practice the same.
-          </motion.p>
-        </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+          >
+            {/* Letter-style callout box — transparent background */}
+            <motion.div
+              variants={fadeUp}
+              className="border border-white/30 p-10 md:p-14 text-left mb-10"
+              style={{ fontFamily: "'Courier New', Courier, monospace", backgroundColor: "rgba(0,0,0,0.15)" }}
+            >
+              <p className="text-white text-lg font-bold uppercase tracking-widest mb-6">
+                We&apos;re Not Hard to Find
+              </p>
+              <hr className="border-white opacity-30 mb-8" />
+              <p className="text-white text-base font-medium leading-loose mb-6">
+                We&apos;re somewhere on the playa. Look for the lantern. Ask someone who looks
+                like they&apos;ve read a good book recently. They&apos;ll know.
+              </p>
+              <p className="text-white text-base font-medium leading-loose mb-8">
+                If you&apos;d like to camp with us, donate books, or just say hello before the dust
+                starts — send a letter. We accept electronic correspondence too, reluctantly.
+              </p>
+              <a
+                href="/join"
+                className="inline-block font-heading uppercase tracking-[0.2em] text-sm px-10 py-4 border border-white text-white hover:bg-white hover:text-[#1E120A] transition-colors duration-150"
+              >
+                Get in Touch
+              </a>
+            </motion.div>
 
-        <div className="border-t border-[#B85C38] mt-20" />
+          </motion.div>
+
+        </div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        <div className="border-t border-[#906558]" />
       </div>
     </section>
   );

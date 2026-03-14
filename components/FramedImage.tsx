@@ -27,7 +27,7 @@ export default function FramedImage({
 }: FramedImageProps) {
   return (
     <div
-      className={`inline-block border-4 border-[#1E120A] ${mat ? "p-2 bg-[#F5EDD8]" : ""} ${className}`}
+      className={`inline-block border-4 border-[#1E120A] ${mat ? "p-2 bg-[#EDE8DF]" : ""} ${className}`}
     >
       <Image
         src={src}
