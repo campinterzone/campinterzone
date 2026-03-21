@@ -38,6 +38,35 @@ Domain: campinterzone.com | Stack: Next.js 16, React 19, TypeScript, Tailwind CS
 - Font sizes: H1 clamp(3rem,6vw,5rem) | H2 clamp(1.5rem,3vw,2.5rem) | Body 1rem
 - Letter spacing on all headings: 0.15em minimum
 
+## Build Status (as of 2026-03-21)
+**Site is live at campinterzone.com** — deployed on Vercel, auto-deploys from GitHub on every push.
+- GitHub: https://github.com/campinterzone/campinterzone (main branch)
+- Vercel project: campinterzone (campinterzone-3719s org)
+- Formspree form: https://formspree.io/f/mbdzajbe (wired to join page)
+
+### What's complete
+- All homepage sections: Hero (video), About, Library (video + card catalogue), Workshops (video), Gifting (video), Footer
+- Gallery page (stub — grid layout ready, needs real photos added)
+- Join / Contact form (Formspree backend wired, confirmation card, loading + error states)
+- Favicon: `app/icon.svg` (desktop) + `app/apple-icon.png` (iOS)
+- OG share image: `app/opengraph-image.png`
+- Security headers, robots.txt, sitemap
+- Mobile responsive across all sections
+
+### What still needs doing
+- Add actual hero video → `public/videos/hero.mp4` + poster image
+- Download Google Photos albums and drop into `public/images/{hero,library,events,gallery}/`
+- Populate gallery page with real FramedImage grid (currently a stub)
+- Mobile: verify iOS favicon is showing after latest push
+- (Optional) Phase 2 members portal — Clerk + Neon, routes under `app/members/`
+
+## Fonts in Use
+- Jost → `--font-jost` (headings, nav, labels)
+- Crimson Pro → `--font-crimson-pro` (editorial body, available)
+- Playfair Display → `--font-playfair` (available, used sparingly)
+- Caveat → `--font-caveat` (handwriting — polaroid captions)
+- Courier Prime / Courier New → body copy and form fields
+
 ## Members Portal (Phase 2 — not built yet)
 - Auth: Clerk | DB: Neon (PostgreSQL)
 - Routes reserved under app/members/ and app/api/auth/
