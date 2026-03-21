@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Jost, Crimson_Pro, Playfair_Display, Caveat } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const jost = Jost({
@@ -61,6 +62,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${jost.variable} ${crimsonPro.variable} ${playfairDisplay.variable} ${caveat.variable}`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
