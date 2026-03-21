@@ -43,6 +43,8 @@ Domain: campinterzone.com | Stack: Next.js 16, React 19, TypeScript, Tailwind CS
 - GitHub: https://github.com/campinterzone/campinterzone (main branch)
 - Vercel project: campinterzone (campinterzone-3719s org)
 - Formspree form: https://formspree.io/f/mbdzajbe (wired to join page)
+- Vercel Analytics: enabled in Vercel dashboard + `<Analytics />` in layout
+- Google Analytics: G-3DW21DSW6N via `@next/third-parties/google` + `<GoogleAnalytics />` in layout
 
 ### What's complete
 - All homepage sections: Hero (video), About, Library (video + card catalogue), Workshops (video), Gifting (video), Footer
@@ -52,6 +54,7 @@ Domain: campinterzone.com | Stack: Next.js 16, React 19, TypeScript, Tailwind CS
 - OG share image: `app/opengraph-image.png`
 - Security headers, robots.txt, sitemap
 - Mobile responsive across all sections
+- Vercel Analytics + Google Analytics (G-3DW21DSW6N)
 
 ### What still needs doing
 - Add actual hero video → `public/videos/hero.mp4` + poster image
