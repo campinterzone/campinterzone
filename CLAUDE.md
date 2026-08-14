@@ -38,7 +38,7 @@ Domain: campinterzone.com | Stack: Next.js 16, React 19, TypeScript, Tailwind CS
 - Font sizes: H1 clamp(3rem,6vw,5rem) | H2 clamp(1.5rem,3vw,2.5rem) | Body 1rem
 - Letter spacing on all headings: 0.15em minimum
 
-## Build Status (as of 2026-03-21)
+## Build Status (as of 2026-08-14)
 **Site is live at campinterzone.com** — deployed on Vercel, auto-deploys from GitHub on every push.
 - GitHub: https://github.com/campinterzone/campinterzone (main branch)
 - Vercel project: campinterzone (campinterzone-3719s org)
@@ -48,6 +48,7 @@ Domain: campinterzone.com | Stack: Next.js 16, React 19, TypeScript, Tailwind CS
 
 ### What's complete
 - All homepage sections: Hero (video), About, Library (video + card catalogue), Workshops (video), Gifting (video), Footer
+- Events & Workshops: live 2026 playa schedule (4 events, Aug 31 – Sep 5) — see "Event Schedule" below
 - Gallery page (stub — grid layout ready, needs real photos added)
 - Join / Contact form (Formspree backend wired, confirmation card, loading + error states)
 - Favicon: `app/icon.svg` (desktop) + `app/apple-icon.png` (iOS)
@@ -62,6 +63,13 @@ Domain: campinterzone.com | Stack: Next.js 16, React 19, TypeScript, Tailwind CS
 - Populate gallery page with real FramedImage grid (currently a stub)
 - Mobile: verify iOS favicon is showing after latest push
 - (Optional) Phase 2 members portal — Clerk + Neon, routes under `app/members/`
+
+## Event Schedule
+Events are a hardcoded `events` array at the top of `components/sections/Workshops.tsx` — no CMS, no API. To change the schedule, edit that array.
+- **Source of truth**: https://playaevents.burningman.org/playa_event/search/2026/?q=Interzone — names, dates, and times must match what's registered there. Descriptions get rewritten in the site's voice rather than pasted from the listings.
+- Current 2026 schedule: Library Loud Hours (daily Mon–Sat 3–6 PM), Books 'n Brews Welcome Party (Mon Aug 31), Tai Chi Workshop (Wed Sep 2), Death Cafe (Fri Sep 4)
+- Grid is `sm:grid-cols-2` capped at `max-w-4xl` — sized for 4 cards. Changing the event count means revisiting both; without the cap, cards stretch across the `max-w-7xl` container and the small card copy strands in whitespace.
+- **Gotcha**: each card's pinned-note tilt lives in the `cardFadeUp` motion variants via the `custom` prop, NOT an inline `transform`. Framer Motion animates `y` on these cards and owns the transform property — an inline `transform: rotate(...)` gets silently overwritten the moment a card animates into view, and the cards render flat.
 
 ## Fonts in Use
 - Jost → `--font-jost` (headings, nav, labels)
