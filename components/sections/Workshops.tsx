@@ -9,6 +9,19 @@ const fadeUp: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
+// Cards carry a pinned-note tilt. Framer Motion owns the transform property
+// while it animates y, so the rotation has to live in the variants — an inline
+// `transform: rotate(...)` style gets overwritten the moment the card animates in.
+const cardFadeUp: Variants = {
+  hidden: (rotate: string) => ({ opacity: 0, y: 30, rotate }),
+  visible: (rotate: string) => ({
+    opacity: 1,
+    y: 0,
+    rotate,
+    transition: { duration: 0.6, ease: "easeOut" },
+  }),
+};
+
 const stagger: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
@@ -109,9 +122,9 @@ export default function Workshops() {
               {events.map((event) => (
                 <motion.div
                   key={event.title}
-                  variants={fadeUp}
+                  variants={cardFadeUp}
+                  custom={event.rotate}
                   className="relative"
-                  style={{ transform: `rotate(${event.rotate})` }}
                   whileHover={{ rotate: 0, scale: 1.03, zIndex: 10, transition: { duration: 0.15 } }}
                 >
                   {/* Pushpin */}
