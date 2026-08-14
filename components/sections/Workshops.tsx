@@ -9,6 +9,19 @@ const fadeUp: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
+// Cards carry a pinned-note tilt. Framer Motion owns the transform property
+// while it animates y, so the rotation has to live in the variants — an inline
+// `transform: rotate(...)` style gets overwritten the moment the card animates in.
+const cardFadeUp: Variants = {
+  hidden: (rotate: string) => ({ opacity: 0, y: 30, rotate }),
+  visible: (rotate: string) => ({
+    opacity: 1,
+    y: 0,
+    rotate,
+    transition: { duration: 0.6, ease: "easeOut" },
+  }),
+};
+
 const stagger: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
@@ -28,9 +41,9 @@ const events = [
   {
     title: "Books 'N Brews\nWelcome Party",
     description:
-      "The official opening of the Lost Times Library. Cold beer, warm company, and shelves full of books waiting to find new owners.",
-    time: "Mon Aug 26",
-    slot: "8:00 – 11:00 PM",
+      "The opening of the Lost Times Library and the start of another burn. Cold beer, warm company, and shelves full of books waiting to find new owners.",
+    time: "Mon Aug 31",
+    slot: "8:00 – 10:30 PM",
     bg: "#F0EBD8",
     pin: "#4A7B6F",
     rotate: "-2deg",
@@ -38,38 +51,18 @@ const events = [
   {
     title: "Tai Chi\nWorkshop",
     description:
-      "Moving meditation at its slowest and most deliberate. A practice in presence, balance, and learning to be where you are.",
-    time: "Mon & Wed",
+      "Moving meditation at its slowest and most deliberate. An introduction to the basic forms — presence, balance, and learning to be where you are.",
+    time: "Wed Sep 2",
     slot: "10:00 – 11:30 AM",
     bg: "#EFF3E8",
     pin: "#1E120A",
     rotate: "1.5deg",
   },
   {
-    title: "Connecting\nwith the Cosmos",
+    title: "Death\nCafe",
     description:
-      "A Kundalini yoga and breathwork session designed to open, ground, and reorient. No experience required — just a willingness to breathe.",
-    time: "Tue Aug 27",
-    slot: "10:00 – 11:00 AM",
-    bg: "#FFF8E7",
-    pin: "#B08020",
-    rotate: "-1deg",
-  },
-  {
-    title: "Yearning\nfor Yoga",
-    description:
-      "A morning yoga session suited to the desert: grounding, gentle, and restorative. Begin the day with intention.",
-    time: "Thu Aug 29",
-    slot: "10:00 – 11:00 AM",
-    bg: "#F5EDE0",
-    pin: "#4A7B6F",
-    rotate: "-1.5deg",
-  },
-  {
-    title: "Attitudes on\nDeath Symposium",
-    description:
-      "An open conversation on mortality, meaning, and how we face the end — held in the spirit of radical honesty and without easy answers.",
-    time: "Fri Aug 30",
+      "An open conversation about death, dying, and the end of life — held in the spirit of radical honesty and without easy answers.",
+    time: "Fri Sep 4",
     slot: "1:00 – 2:00 PM",
     bg: "#EAE8F0",
     pin: "#1E120A",
@@ -125,13 +118,13 @@ export default function Workshops() {
             viewport={{ once: true, margin: "-60px" }}
             variants={stagger}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
               {events.map((event) => (
                 <motion.div
                   key={event.title}
-                  variants={fadeUp}
+                  variants={cardFadeUp}
+                  custom={event.rotate}
                   className="relative"
-                  style={{ transform: `rotate(${event.rotate})` }}
                   whileHover={{ rotate: 0, scale: 1.03, zIndex: 10, transition: { duration: 0.15 } }}
                 >
                   {/* Pushpin */}
