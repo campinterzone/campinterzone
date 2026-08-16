@@ -61,7 +61,7 @@ const photos = [
 export default function GalleryPage() {
   return (
     <>
-      <Navigation />
+      <Navigation opaque />
       <main className="bg-[#EDE8DF] pt-24">
         {/* Header */}
         <div className="max-w-5xl mx-auto px-6 py-20 text-center border-b border-[#906558]">

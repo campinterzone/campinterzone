@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Jost, Crimson_Pro, Playfair_Display, Caveat } from "next/font/google";
+import { Jost, Crimson_Pro, Playfair_Display, Caveat, Courier_Prime } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
@@ -7,7 +7,14 @@ import "./globals.css";
 const jost = Jost({
   variable: "--font-jost",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const courierPrime = Courier_Prime({
+  variable: "--font-courier-prime",
+  subsets: ["latin"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -59,9 +66,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // The font variables must land on <html>, not <body>: globals.css declares
+  // --font-heading/--font-body/etc. on :root in terms of these, and a var()
+  // that is undefined on :root makes the whole token compute to empty.
   return (
-    <html lang="en">
-      <body className={`${jost.variable} ${crimsonPro.variable} ${playfairDisplay.variable} ${caveat.variable}`}>
+    <html
+      lang="en"
+      className={`${jost.variable} ${crimsonPro.variable} ${playfairDisplay.variable} ${caveat.variable} ${courierPrime.variable}`}
+    >
+      <body>
         {children}
         <Analytics />
         <GoogleAnalytics gaId="G-3DW21DSW6N" />

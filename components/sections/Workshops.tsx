@@ -1,173 +1,209 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
+import FramedImage from "@/components/FramedImage";
+import { reveal, revealViewport } from "@/components/motion";
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+const PLAYA_EVENTS = "https://playaevents.burningman.org";
+
+type PlayaEvent = {
+  dayName: string;
+  date: string;
+  month: string;
+  title: string;
+  slot: string;
+  tag: string;
+  href: string;
+  description: string;
+  featured?: boolean;
 };
 
-// Cards carry a pinned-note tilt. Framer Motion owns the transform property
-// while it animates y, so the rotation has to live in the variants — an inline
-// `transform: rotate(...)` style gets overwritten the moment the card animates in.
-const cardFadeUp: Variants = {
-  hidden: (rotate: string) => ({ opacity: 0, y: 30, rotate }),
-  visible: (rotate: string) => ({
-    opacity: 1,
-    y: 0,
-    rotate,
-    transition: { duration: 0.6, ease: "easeOut" },
-  }),
-};
-
-const stagger: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
-const events = [
+/**
+ * Source of truth for names, dates, and times:
+ * https://playaevents.burningman.org/playa_event/search/2026/?q=Interzone
+ * Descriptions are rewritten in the site's voice rather than pasted.
+ */
+const events: PlayaEvent[] = [
   {
-    title: "Library\nLoud Hours",
+    dayName: "Mon to Sat",
+    date: "All",
+    month: "Aug 31 - Sep 5",
+    title: "Library Loud Hours",
+    slot: "3:00 to 6:00 PM",
+    tag: "Beverages",
+    href: `${PLAYA_EVENTS}/playa_event/56367/`,
     description:
-      "Music, cold draft beer, and an open door. The library goes loud every afternoon. Walk in. Stay as long as you like.",
-    time: "Daily Mon – Sat",
-    slot: "3:00 – 6:00 PM",
-    bg: "#FFF8E7",
-    pin: "#B08020",
-    rotate: "2deg",
+      "Take a book from our library and enjoy craft beer on tap. The library goes loud every afternoon. Walk in and stay as long as you like.",
+    featured: true,
   },
   {
-    title: "Books 'N Brews\nWelcome Party",
+    dayName: "Monday",
+    date: "31",
+    month: "Aug",
+    title: "Books 'n Brews Welcome Party",
+    slot: "8:00 to 10:30 PM",
+    tag: "Music and party",
+    href: `${PLAYA_EVENTS}/playa_event/56969/`,
     description:
-      "The opening of the Lost Times Library and the start of another burn. Cold beer, warm company, and shelves full of books waiting to find new owners.",
-    time: "Mon Aug 31",
-    slot: "8:00 – 10:30 PM",
-    bg: "#F0EBD8",
-    pin: "#4A7B6F",
-    rotate: "-2deg",
+      "Celebrate the start of another burn with craft beer and peruse our library. Shelves full of books waiting to find new owners.",
   },
   {
-    title: "Tai Chi\nWorkshop",
+    dayName: "Wednesday",
+    date: "02",
+    month: "Sep",
+    title: "Tai Chi Workshop",
+    slot: "10:00 to 11:30 AM",
+    tag: "Class and workshop",
+    href: `${PLAYA_EVENTS}/playa_event/56966/`,
     description:
-      "Moving meditation at its slowest and most deliberate. An introduction to the basic forms — presence, balance, and learning to be where you are.",
-    time: "Wed Sep 2",
-    slot: "10:00 – 11:30 AM",
-    bg: "#EFF3E8",
-    pin: "#1E120A",
-    rotate: "1.5deg",
+      "An intro to moving meditation, basic Tai Chi movement, and interactive practice. Presence, balance, and learning to be where you are.",
   },
   {
-    title: "Death\nCafe",
+    dayName: "Friday",
+    date: "04",
+    month: "Sep",
+    title: "Death Cafe",
+    slot: "1:00 to 2:00 PM",
+    tag: "Class and workshop",
+    href: `${PLAYA_EVENTS}/playa_event/56968/`,
     description:
-      "An open conversation about death, dying, and the end of life — held in the spirit of radical honesty and without easy answers.",
-    time: "Fri Sep 4",
-    slot: "1:00 – 2:00 PM",
-    bg: "#EAE8F0",
-    pin: "#1E120A",
-    rotate: "1deg",
+      "Join an open discussion about death, dying, and end of life issues, held in the spirit of radical honesty and without easy answers.",
   },
 ];
 
 export default function Workshops() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    if (videoRef.current) videoRef.current.playbackRate = 0.5;
-  }, []);
-
   return (
-    <section id="workshops" className="relative">
+    <section
+      id="workshops"
+      className="relative bg-[#EDE8DF] text-[#1E120A] border-t border-[#906558] px-6 md:px-[4.5rem] py-24 md:py-32"
+    >
+      <div className="max-w-[82rem] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] gap-12 lg:gap-20 items-start">
 
-      {/* ── VIDEO + CARDS ── */}
-      <div className="relative overflow-hidden bg-[#1E120A]">
-        <video
-          ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="/videos/library loud hours 2.MOV" type="video/mp4" />
-          <source src="/videos/library loud hours 2.MOV" type="video/quicktime" />
-        </video>
-        <div className="absolute inset-0 bg-[#1E120A]" style={{ opacity: 0.6 }} />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-32 pt-24 md:pt-40">
-          {/* Header */}
+        {/* ── LEFT RAIL ── */}
+        <div className="min-w-0 flex flex-col gap-10 lg:sticky lg:top-28">
           <motion.div
-            className="text-center mb-16"
+            className="flex flex-col gap-6"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={stagger}
+            viewport={revealViewport}
+            variants={reveal}
           >
-            <motion.h2
-              variants={fadeUp}
-              style={{ fontFamily: "'Courier New', Courier, monospace", letterSpacing: "0.1em", fontSize: "clamp(1.8rem, 4vw, 3rem)", color: "#ffffff", textTransform: "uppercase", fontWeight: 700 }}
+            <h2
+              className="font-heading font-light uppercase tracking-[0.13em] leading-[1.1]"
+              style={{ fontSize: "clamp(1.7rem, 3.4vw, 2.7rem)" }}
             >
-              Events &amp; Workshops
-            </motion.h2>
+              2026 Events &amp;
+              <br />
+              Workshops
+            </h2>
+            <div className="w-[5rem] border-t border-[#906558]" />
+            <p className="max-w-[24rem] font-mono text-[0.85rem] uppercase tracking-[0.2em] text-[#6B5045]">
+              Aug 31 to Sep 6, 2026
+            </p>
           </motion.div>
 
-          {/* Cards */}
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={stagger}
+            viewport={revealViewport}
+            variants={reveal}
+            custom={120}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
-              {events.map((event) => (
-                <motion.div
-                  key={event.title}
-                  variants={cardFadeUp}
-                  custom={event.rotate}
-                  className="relative"
-                  whileHover={{ rotate: 0, scale: 1.03, zIndex: 10, transition: { duration: 0.15 } }}
-                >
-                  {/* Pushpin */}
-                  <div
-                    className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 border-2 border-[#3D2610] z-10"
-                    style={{ backgroundColor: event.pin }}
-                  />
-                  {/* Paper */}
-                  <div
-                    className="border border-[#C4B898] px-5 pt-7 pb-5"
-                    style={{ backgroundColor: event.bg, fontFamily: "'Courier New', Courier, monospace" }}
-                  >
-                    <div className="border-b-2 border-[#B08020] mb-4 pb-3">
-                      <h3
-                        className="font-bold text-[#1E120A] uppercase leading-tight text-xl md:text-[0.85rem]"
-                        style={{ letterSpacing: "0.05em", whiteSpace: "pre-line" }}
-                      >
-                        {event.title}
-                      </h3>
-                    </div>
-                    <p className="text-[#1E120A] leading-relaxed mb-4" style={{ fontSize: "0.72rem" }}>
-                      {event.description}
-                    </p>
-                    <div className="border-t border-dashed border-[#8B7355] pt-3 flex justify-between items-end">
-                      <span className="uppercase tracking-widest text-[#1E120A]" style={{ fontSize: "0.6rem" }}>
-                        {event.time}
-                      </span>
-                      <span className="font-bold text-[#1E120A]" style={{ fontSize: "0.65rem" }}>
-                        {event.slot}
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <FramedImage
+              src="/images/gallery/library-sign.jpg"
+              alt="The Lost Times Library sign at camp"
+              width={900}
+              height={700}
+              imageClassName="w-full h-[20rem] object-cover"
+            />
           </motion.div>
         </div>
-      </div>
 
-      {/* Divider */}
-      <div className="bg-[#EDE8DF] px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="border-t border-[#906558]" />
+        {/* ── EVENT LIST ── */}
+        <div className="min-w-0 flex flex-col">
+          {events.map((event) => (
+            <motion.div
+              key={event.title}
+              className={`border-t py-11 grid grid-cols-[4.5rem_minmax(0,1fr)] sm:grid-cols-[8rem_minmax(0,1fr)] gap-6 sm:gap-10 items-start ${
+                event.featured ? "border-[#1E120A]" : "border-[#906558]"
+              }`}
+              initial="hidden"
+              whileInView="visible"
+              viewport={revealViewport}
+              variants={reveal}
+            >
+              {/* Date stack — weekday / numeral / month */}
+              <div className="flex flex-col gap-[0.35rem] items-start">
+                <span className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-[#6B5045]">
+                  {event.dayName}
+                </span>
+                <span
+                  className={`font-display font-bold text-[3rem] leading-[0.9] ${
+                    event.featured ? "text-[#B08020]" : "text-[#1E120A]"
+                  }`}
+                >
+                  {event.date}
+                </span>
+                <span className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#6B5045]">
+                  {event.month}
+                </span>
+              </div>
+
+              <div className="min-w-0 flex flex-col gap-4">
+                <div className="flex items-baseline justify-between gap-8 flex-wrap">
+                  <h3
+                    className="font-heading font-light uppercase tracking-[0.12em] leading-[1.2]"
+                    style={{ fontSize: "clamp(1.2rem, 2.4vw, 1.75rem)" }}
+                  >
+                    <a
+                      href={event.href}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-[#1E120A] no-underline hover:text-[#B08020]"
+                    >
+                      {event.title}
+                    </a>
+                  </h3>
+                  <span className="font-mono text-[0.8rem] tracking-[0.1em] text-[#1E120A] whitespace-nowrap">
+                    {event.slot}
+                  </span>
+                </div>
+
+                <p className="max-w-[34rem] text-[1.05rem] leading-[1.85] text-[#1E120A] text-pretty">
+                  {event.description}
+                </p>
+
+                <div className="flex items-center gap-6 flex-wrap">
+                  <span
+                    className={`font-heading font-semibold text-[0.6rem] uppercase tracking-[0.24em] ${
+                      event.featured ? "text-[#B08020]" : "text-[#6B5045]"
+                    }`}
+                  >
+                    {event.tag}
+                  </span>
+                  <a
+                    href={event.href}
+                    target="_blank"
+                    rel="noopener"
+                    className="font-mono text-[0.66rem] uppercase tracking-[0.2em] text-[#6B5045] hover:text-[#B08020]"
+                  >
+                    Listing on PlayaEvents
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+
+          <motion.div
+            className="border-t border-[#906558] pt-8 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-[#6B5045]"
+            initial="hidden"
+            whileInView="visible"
+            viewport={revealViewport}
+            variants={reveal}
+          >
+            Workshops are added through the week. The board by the door is the
+            only schedule that counts.
+          </motion.div>
         </div>
       </div>
     </section>
