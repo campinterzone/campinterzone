@@ -6,6 +6,8 @@ interface FramedImageProps {
   width: number;
   height: number;
   className?: string;
+  /** Classes applied to the <Image> itself — e.g. a fixed height with object-cover */
+  imageClassName?: string;
   /** Optional white inner mat between image and frame border */
   mat?: boolean;
 }
@@ -23,19 +25,19 @@ export default function FramedImage({
   width,
   height,
   className = "",
+  imageClassName = "",
   mat = false,
 }: FramedImageProps) {
   return (
     <div
-      className={`inline-block border-4 border-[#1E120A] ${mat ? "p-2 bg-[#EDE8DF]" : ""} ${className}`}
+      className={`border-4 border-[#1E120A] leading-[0] ${mat ? "p-2 bg-[#EDE8DF]" : ""} ${className}`}
     >
       <Image
         src={src}
         alt={alt}
         width={width}
         height={height}
-        className="block"
-        style={{ display: "block" }}
+        className={`block ${imageClassName}`}
       />
     </div>
   );

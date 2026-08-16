@@ -4,15 +4,23 @@
   /* Color palette */
   --color-canvas: #EDE8DF;
   --color-canvas-2: #E0D5C5;
+  --color-espresso: #1E120A;
   --color-accent: #906558;
   --color-cta: #B08020;
+  --color-gold-light: #C4A35A;
   --color-text: #1E120A;
   --color-text-muted: #6B5045;
+  --color-box-border: #8B7355;
+  --color-box-fill: #F0E8D0;
+  --color-footer-bg: #1E2535;
+  --color-footer-border: #4A6080;
+  --color-footer-text: #8FA8C0;
 
   /* Typography */
   --font-heading: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-crimson-pro), Georgia, "Times New Roman", serif;
   --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-courier-prime), "Courier Prime", "Courier New", monospace;
 
   /* Spacing scale (unchanged from Tailwind defaults) */
 }
@@ -30,11 +38,17 @@ html {
 }
 
 body {
-  background-color: #EDE8DF;
-  color: #1E120A;
+  background-color: #1E120A;
+  color: #EDE8DF;
   font-family: var(--font-body);
   font-size: 1.125rem;
   line-height: 1.8;
+  overflow-x: clip;
+}
+
+::selection {
+  background: #B08020;
+  color: #1E120A;
 }
 
 /* Enforce snap hover states — no CSS transitions on interactive elements */
@@ -52,12 +66,12 @@ textarea,
   border-top: 1px solid #906558;
 }
 
-/* Heading utility */
+/* Headings — Jost, all-caps, light. Sections set their own size and tracking. */
 h1, h2, h3 {
   font-family: var(--font-heading);
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-weight: 600;
+  font-weight: 300;
+  margin: 0;
 }
 
 h1 {
@@ -66,15 +80,10 @@ h1 {
 }
 
 h2 {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  font-weight: 700;
-  text-transform: none;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.13em;
 }
 
 h3 {
-  font-size: 1.25rem;
   letter-spacing: 0.12em;
 }
 
@@ -91,11 +100,31 @@ h3 {
   border-bottom: 1px dotted #1E120A;
   outline: none;
   width: 100%;
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: #1E120A;
   padding: 0.5rem 0;
 }
 
 .card-input::placeholder {
   color: #6B5045;
+}
+
+/* Loud Hours ticker strip */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 34s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
 }
