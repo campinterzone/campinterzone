@@ -42,6 +42,16 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[#1E120A] opacity-[0.42]" />
 
       <div className="relative flex flex-col gap-8 max-w-[64rem] px-6 md:px-[4.5rem] pt-36 md:pt-[9rem] pb-24 md:pb-[6.5rem]">
+        {/* Leads the hero sequence, ahead of the headline at 700ms and the rule at 1400ms. */}
+        <motion.img
+          src="/logo.svg"
+          alt="Camp Interzone"
+          className="block w-[clamp(12rem,32vw,30rem)] h-auto invert mb-8"
+          initial={{ opacity: 0, y: 34 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.3, ease: EASE }}
+        />
+
         <motion.h1
           className="font-heading font-light uppercase tracking-[0.09em] leading-[1.04] text-white"
           style={{ fontSize: "clamp(1.9rem, 5.4vw, 4.8rem)" }}
