@@ -36,27 +36,15 @@ export default function Library() {
         viewport={revealViewport}
         variants={reveal}
       >
-        {/*
-          Design calls for the stacked `lost-times-library-logo.png` wordmark
-          here, inverted to white. That export is not in the repo yet — until it
-          lands, the wordmark is set in type. To swap it in, drop the PNG at
-          public/images/lost-times-library-logo.png and replace the <h2> below with:
-
-          <h2 className="leading-[0]">
-            <img
-              src="/images/lost-times-library-logo.png"
-              alt="Lost Times Library"
-              className="block w-[clamp(14rem,26vw,22rem)] h-auto invert"
-            />
-          </h2>
-        */}
-        <h2
-          className="font-heading font-light uppercase tracking-[0.14em] leading-[1.05] text-white"
-          style={{ fontSize: "clamp(2rem, 5vw, 3.6rem)" }}
-        >
-          Lost Times
-          <br />
-          Library
+        {/* The stacked wordmark replaces a text heading here. Its viewBox is
+            trimmed to the lettering, so the width below sizes the ink itself. */}
+        <h2 className="leading-[0]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/lost-times-library-logo.svg"
+            alt="Lost Times Library"
+            className="block w-[clamp(14rem,26vw,22rem)] h-auto invert"
+          />
         </h2>
 
         <div className="w-[9rem] border-t border-[#906558]" />

@@ -34,6 +34,7 @@ Domain: campinterzone.com | Stack: Next.js 16, React 19, TypeScript, Tailwind CS
 - `components/Navigation.tsx` — fixed translucent header; `ctaLabel`/`ctaHref`/`opaque` props
 - `public/logo.svg` — SVG wordmark (render in #1E120A on light, `invert` on dark)
 - `public/images/hero/hero-night.jpg` — hero still (the looping hero.mp4 is retained, commented out in Hero.tsx)
+- `public/images/lost-times-library-logo.svg` — stacked wordmark used in place of the Library heading; viewBox is trimmed to the lettering so CSS width sizes the ink, and it renders with `invert` on dark
 - `public/images/{hero,library,events,gallery}/` — organized media
 
 ## Conventions
