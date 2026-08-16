@@ -33,8 +33,8 @@ export default function Navigation({
       </Link>
 
       <div className="flex items-center gap-4 md:gap-8">
-        <span className="hidden sm:inline font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[#C4A35A]">
-          Aug 31 to Sep 7 &middot; Black Rock City
+        <span className="hidden lg:inline font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[#C4A35A] whitespace-nowrap">
+          Aug 31 &ndash; Sep 7, 2026 &middot; 6:30 &amp; B &middot; Black Rock City
         </span>
         <Link
           href={ctaHref}
