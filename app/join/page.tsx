@@ -85,15 +85,9 @@ export default function JoinPage() {
               before the dust starts, send a letter. We accept electronic
               correspondence too, reluctantly.
             </p>
-            <div className="border-t border-[rgba(144,101,88,0.6)] pt-6 flex flex-col gap-2 font-mono text-[0.82rem] tracking-[0.1em]">
-              <a
-                href="mailto:hello@campinterzone.com"
-                className="text-[#C4A35A] hover:text-white"
-              >
-                hello@campinterzone.com
-              </a>
-              <span className="text-white/60 text-[0.7rem] uppercase tracking-[0.2em]">
-                Placement pending &middot; Black Rock City
+            <div className="border-t border-[rgba(144,101,88,0.6)] pt-6 font-mono tracking-[0.1em]">
+              <span className="text-[#C4A35A] text-[0.82rem] uppercase tracking-[0.2em]">
+                6:30 &amp; B &middot; Black Rock City
               </span>
             </div>
           </div>
